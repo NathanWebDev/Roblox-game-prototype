@@ -6,8 +6,26 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local playerGui = player.PlayerGui
 
-local stamina = 100
-local maxStamina = 100
+player:SetAttribute("Health", 80)
+player:SetAttribute("MaxHealth", 80)
+
+player:SetAttribute("Mana", 50)
+player:SetAttribute("MaxMana", 50)
+
+player:SetAttribute("Stamina", 80)
+player:SetAttribute("MaxStamina", 80)
+
+--Health Logic
+local maxHealth = player:GetAttribute("MaxHealth")
+
+player:GetAttributeChangedSignal("Health"):Connect(function()
+	local newHealth = player:GetAttribute("Health")
+	playerGui.ScreenGui.HealthContainer.Health.Size = UDim2.new(newHealth / maxHealth, 1, 1, 0)
+end)
+
+--Stamina Logic
+local stamina = player:GetAttribute("Stamina")
+local maxStamina = player:GetAttribute("MaxStamina")
 
 local speedDifference = 8
 local drainRate = 20
@@ -45,14 +63,16 @@ runService.Heartbeat:Connect(function(deltaTime)
 	if sprinting then
 		stamina = math.max(0, stamina - drainRate * deltaTime)
 		updateStamina()
+		player:SetAttribute("Stamina", stamina)
 		print(math.floor(stamina))
 		if stamina == 0 then
 			sprint(false)
 			exhausted = true
 		end
 	else
-		stamina = math.min(100, stamina + refreshRate * deltaTime)
+		stamina = math.min(maxStamina, stamina + refreshRate * deltaTime)
 		updateStamina()
+		player:SetAttribute("Stamina", stamina)
 		if stamina >= staminaRefresh then
 			exhausted = false
 			print(math.floor(stamina))
