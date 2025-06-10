@@ -41,6 +41,16 @@ end)
 local stamina = player:GetAttribute("Stamina")
 local maxStamina = player:GetAttribute("MaxStamina")
 
+player:GetAttributeChangedSignal("MaxStamina"):Connect(function()
+	local newMaxHealth = player:GetAttribute("MaxStamina")
+	playerGui.ScreenGui.StaminaContainer.Size = UDim2.new(
+		0,
+		newMaxHealth * 3,
+		playerGui.ScreenGui.StaminaContainer.Size.X.Scale,
+		playerGui.ScreenGui.StaminaContainer.Size.Y.Offset
+	)
+end)
+
 local speedDifference = 8
 local drainRate = 20
 local refreshRate = 10
