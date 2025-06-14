@@ -1,1 +1,4 @@
 6-12-2025: Added rolling animation
+
+6-13-2025: Changed Avatar model to R6 from R15 which allowed the rolling animation to play
+- Adjusted Roll animation
