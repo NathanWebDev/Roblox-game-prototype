@@ -4,3 +4,5 @@
 - Adjusted Roll animation
 
 7-24-2025: Added Shortsword model for Knight class
+
+7-24-2025: Added Greataxe model for Warrior class
