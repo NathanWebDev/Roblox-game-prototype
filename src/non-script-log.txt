@@ -8,3 +8,5 @@
 7-24-2025: Added Greataxe model for Warrior class
 
 7-31-2025: Added point to Shortsword model
+
+8-4-2025: Added Dagger model for Mage class
